@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Mondstern Acryl Icons"
+rootProject.name = "Pixel Icons"
 include(":app")
