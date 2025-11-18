@@ -1,0 +1,38 @@
+---
+steps:
+  check-xml-validity:
+    image: alpine
+    commands:
+      - apk add libxml2-utils
+      - xmllint --noout app/src/main/res/xml/appfilter.xml
+  generate-iconpack:
+    image: alpine
+    commands:
+      - ./scripts/generate_iconpack.sh
+      - ./scripts/generate_drawable_xml.sh
+  optimize-icons:
+    image: alpine
+    commands:
+      - apk add imagemagick imagemagick-jpeg
+      - ./scripts/optimize_icons.sh
+  push-generated-data:
+    image: appleboy/drone-git-push
+    settings:
+      branch: "${CI_COMMIT_BRANCH}"
+      remote: "git@codeberg.org:${CI_REPO}"
+      author_name: "Codeberg CI"
+      author_email: "no-reply+ci@codeberg.org"
+      commit: true
+      commit_message: "[skip ci] Ran scripts"
+      ssh_key:
+        from_secret: git_push_key
+  sanity-check:
+    image: python:3
+    commands:
+      - pip3 install requests
+      - python3 sanity_check.py
+  version-check:
+    image: alpine
+    commands:
+      - apk add bash curl jq
+      - bash version_check.sh

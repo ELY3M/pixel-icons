@@ -1,0 +1,5 @@
+com.x8bit.bitwarden
+org.qtproject.friendiqa
+com.m2049r.xmrwallet
+com.ericbt.ebtcompass
+cz.pds.eprssreader
