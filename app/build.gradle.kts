@@ -12,8 +12,8 @@ android {
         applicationId = "de.moooon.acrylicons"
         minSdk = 21
         targetSdk = 36
-        versionCode = 18
-        versionName = "18.0"
+        versionCode = 1
+        versionName = "1.0"
     }
 
     buildTypes {
